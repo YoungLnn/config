@@ -40,8 +40,9 @@ floating_modifier $mod
 
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
-#bindsym $mod+z exec alacritty
-bindsym $mod+Return exec deepin-terminal
+bindsym $mod+z exec deepin-terminal
+bindsym $mod+Return exec gnome-terminal
+
 # star a music
 bindsym $mod+m exec netease-cloud-music
 
@@ -195,18 +196,25 @@ bar {
 }
 
 #自定义窗口
-gaps inner 15
-hide_edge_borders both
+#gaps inner 15
+#hide_edge_borders both
 #new_window pixel 0
 
 
 #自定义启动程序
-exec_always --no-startup-id fcitx
+##################################
+exec --no-startup-id export GTK_IM_MODULE=ibus
+exec --no-startup-id export XMODIFIERS=@im=ibus
+exec --no-startup-id export QT_IM_MODULE=ibus
+###########################
+exec --no-startup-id ibus-daemon --xim -d -r
+#exec_always --no-startup-id fcitx
 exec_always compton -b
 #exec-always --no-startup-id compton -o 0 -D 0 -b
 exec_always --no-startup-id feh  --bg-fill ~/Pictures/bizhi.jpg
 exec_always --no-startup-id network-manager-applet
 exec volumeicon
+
 
 #自定义工作区
 #打开软件时自动移至相应工作区，可用 xprop | grep WM_CLASS 命令获取wm_class
